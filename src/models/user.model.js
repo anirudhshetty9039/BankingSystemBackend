@@ -34,13 +34,18 @@ const userSchema  = new mongoose.Schema({
     name:{
         type:String,
         required :[true,"Name is required for creating a user"],
-        trim:true
     },
 
     password:{
         type:String,
         required:[true,"Password is required for creating an account"],
         minLength:[6,"password should have minimum of 6 characters"],
+        select:false
+    },
+    systemUser:{
+        type:Boolean,
+        default:false,
+        immutable:true,
         select:false
     }
 
@@ -53,13 +58,12 @@ const userSchema  = new mongoose.Schema({
 userSchema.pre("save" , async function(next){
 
             if(!this.isModified("password")) {
-                return
-
+                return 
             }
 
         const hash= await bcrypt.hash(this.password,10);
         this.password=hash;
-        return
+        return 
      }
 )
 
@@ -68,4 +72,6 @@ userSchema.methods.comparePassword = async function(password){
     return await bcrypt.compare(password,this.password)
 }
 // export the user model
-module.exports = mongoose.model("User",userSchema);
+const userModel = mongoose.model("user", userSchema)
+
+module.exports = userModel

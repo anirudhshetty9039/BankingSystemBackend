@@ -6,7 +6,7 @@ const accountSchema = new mongoose.Schema(
     {
         user:{
             type:mongoose.Schema.Types.ObjectId,
-            ref:"User",
+            ref:"user",
             required:[true,"User is required for creating an account"],
             index:true  //to make search faster on this field
             // this index is mongodb feature and b+tree is used in the index part of mongodb to make search faster on this field
@@ -15,8 +15,8 @@ const accountSchema = new mongoose.Schema(
         status:{
             type:String,
             enum:{
-             values:["Active","Frozen" , "Closed"],
-            message:"Status should be either Active , Frozen or Closed"
+             values:["ACTIVE","FROZEN" , "CLOSED"],
+            message:"Status should be either ACTIVE, FROZEN or CLOSED"
             },
             default:"ACTIVE",
             
@@ -60,7 +60,9 @@ const accountSchema = new mongoose.Schema(
                         ]
                     }
                 },
-            },
+            }
+        },
+        {
             $project:{
                     _id:0,
                     balance:{$subtract:["$totalCredit","$totalDebit"]}
@@ -71,6 +73,6 @@ const accountSchema = new mongoose.Schema(
       return balanceData[0]?.balance || 0;
     }
      
-    const accountModel = mongoose.model("Account",accountSchema);
+    const accountModel = mongoose.model("account",accountSchema);
     module.exports = accountModel;
     
