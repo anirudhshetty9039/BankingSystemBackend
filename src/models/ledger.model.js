@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ledgerSchema = new mongoose.Schema({
     account:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Account",
+        ref:"account",
         required:[true,"Ledger must be associated with an accounnt"],
         index:true,//to make search faster on this field
         immutable:true  //once ledger is created, it cannot be changed
@@ -17,7 +17,7 @@ const ledgerSchema = new mongoose.Schema({
 
     transaction:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Transaction",
+        ref:"transaction",
         required:[true,"Ledger must be associated with a transaction"],
         index:true, //to make search faster on this field
         immutable:true  //once ledger is created, it cannot be changed
@@ -49,6 +49,6 @@ ledgerSchema.pre("updateMany",preventLedgerModification);
 ledgerSchema.pre("findOneAndDelete",preventLedgerModification);
 ledgerSchema.pre("findOneAndReplace",preventLedgerModification);
 
-const ledgerModel = mongoose.model("Ledger",ledgerSchema);
+const ledgerModel = mongoose.model("ledger",ledgerSchema);
 
 module.exports = ledgerModel;
