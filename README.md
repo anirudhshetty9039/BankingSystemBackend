@@ -5,7 +5,7 @@ A RESTful banking backend that simulates core banking operations such as user au
 ## 🚀 Live Demo
 
 **Render:**  
-> *(Add Render URL here)*
+https://bankingsystembackend-42tk.onrender.com
 
 ## ✨ Highlights
 
@@ -27,7 +27,7 @@ A RESTful banking backend that simulates core banking operations such as user au
 Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/anirudhshetty9039/banking-backend.git
 cd BankingSystemBackend
 ```
 
@@ -65,7 +65,6 @@ http://localhost:3000
 
 The APIs can be tested using Postman.
 
-> *(Add Postman Collection link here)*
 
 ---
 
